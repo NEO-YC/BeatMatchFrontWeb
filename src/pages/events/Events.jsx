@@ -82,8 +82,8 @@ export default function Events({ isAdmin, user }) {
             רוצה לראות אירועים ולהגדיל הכנסות? הפוך את הפרופיל שלך לפעיל בתשלום קצר ותהנה מגישה מלאה ללוח האירועים.
           </p>
           <div className="payment-actions">
-            <a href="/musician/edit" className="btn-primary">שדרג לחבר PRO</a>
-            <a href="/my-events" className="btn-secondary">האירועים שלי</a>
+           <button onClick={() => navigate('/musician/edit')} className="btn-primary">שדרג לחבר PRO</button>
+            <button onClick={() => navigate('/my-events')} className="btn-secondary">האירועים שלי</button>
           </div>
         </div>
       </div>

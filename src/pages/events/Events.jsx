@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 // דף לוח אירועים: אם המשתמש אינו מוזיקאי פעיל, נראה הודעת תשלום.
 // אם הוא פעיל — נטען ונציג אירועים פתוחים.
 export default function Events({ isAdmin, user }) {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [events, setEvents] = useState([]);

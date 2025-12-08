@@ -8,7 +8,7 @@ import './CreateMusicianProfile.css';
 // - קומפוננטה זו תומכת בשדות טקסט + העלאת תמונות/וידאו (FormData).
 // - היא מצפה ש-token יישמר ב-localStorage תחת 'token' כדי לשלוח Authorization.
 // - אם יש קבצים נשלח FormData, אחרת נשלח JSON ל-API.
-// - ה-API כאן מכוון ל-'http://localhost:3000/user/musician/profile' (ניתן לשנות).
+// - ה-API כאן מכוון לנתיב מבוסס env (VITE_API_URL) למשל 'https://beatmatchbackweb.onrender.com/user/musician/profile'.
 export default function CreateMusicianProfile() {
   // הערה: קומפוננטה ליצירת/עדכון פרופיל מוזיקאי
 

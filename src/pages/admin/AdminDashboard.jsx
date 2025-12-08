@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import './AdminDashboard.css';
+import { API_BASE_URL } from '../../services/api';
 
 const AdminDashboard = () => {
     const [users, setUsers] = useState([]);
@@ -41,7 +42,7 @@ const AdminDashboard = () => {
         try {
             setLoading(true);
             setError(null);
-            const response = await fetch('http://localhost:3000/user/admin/users', {
+            const response = await fetch(`${API_BASE_URL}/user/admin/users`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -64,7 +65,7 @@ const AdminDashboard = () => {
 
     const toggleRole = async (userId, currentRole) => {
         try {
-            const response = await fetch(`http://localhost:3000/user/admin/users/${userId}/role`, {
+            const response = await fetch(`${API_BASE_URL}/user/admin/users/${userId}/role`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -87,7 +88,7 @@ const AdminDashboard = () => {
 
     const toggleSubscription = async (userId, currentStatus) => {
         try {
-            const response = await fetch(`http://localhost:3000/user/admin/users/${userId}/togglesub`, {
+            const response = await fetch(`${API_BASE_URL}/user/admin/users/${userId}/togglesub`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -114,7 +115,7 @@ const AdminDashboard = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:3000/user/admin/users/${userId}`, {
+            const response = await fetch(`${API_BASE_URL}/user/admin/users/${userId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

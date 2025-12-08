@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import "./Search.css";
 import MusicianCard from "./musician/MusicianCard";
+import { API_BASE_URL } from "../services/api";
 
 const SUGGESTED_INSTRUMENTS = [
   "זמר",
@@ -131,8 +132,7 @@ export default function Search() {
       else if (locationInput) params.append("location", locationInput);
       if (query) params.append("q", query);
 
-      const url =
-        "http://127.0.0.1:3000/user/musicians/search?" + params.toString();
+      const url = `${API_BASE_URL}/user/musicians/search?${params.toString()}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error(await res.text());
       const data = await res.json();

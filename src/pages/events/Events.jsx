@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { eventsApi } from '../../services/api';
 import EventCard from './EventCard';
 import './Events.css';
+import { useNavigate } from 'react-router-dom';
 
 // דף לוח אירועים: אם המשתמש אינו מוזיקאי פעיל, נראה הודעת תשלום.
 // אם הוא פעיל — נטען ונציג אירועים פתוחים.
@@ -62,8 +63,8 @@ export default function Events({ isAdmin, user }) {
             הירשם לאתר כדי לפרסם אירועים ולחפש מוזיקאים מקצועיים לאירוע שלך!
           </p>
           <div className="payment-actions">
-            <a href="/register" className="btn-primary">הירשם עכשיו</a>
-            <a href="/login" className="btn-secondary">יש לי חשבון - התחבר</a>
+             <button onClick={() => navigate('/register')} className="btn-primary">הירשם עכשיו</button>
+            <button onClick={() => navigate('/login')} className="btn-secondary">יש לי חשבון - התחבר</button>
           </div>
         </div>
       </div>

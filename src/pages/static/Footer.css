@@ -1,0 +1,142 @@
+.site-footer {
+  background: #ffffff;
+  border-top: 2px solid transparent;
+  border-image: linear-gradient(90deg, #ff5db1, #2fd8c7) 1;
+  color: #0b2233;
+  margin-top: 4vh;
+}
+
+.footer-content.simple {
+  max-width: min(1100px, 94vw);
+  margin: 0 auto;
+  padding: 12px 12px;
+}
+
+.footer-bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1rem;
+  background: linear-gradient(90deg, #ff5db1, #2fd8c7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-link {
+  color: #0b2233;
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 2px 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.footer-link:hover {
+  background-color: rgba(47, 216, 199, 0.12);
+  color: #ff5db1;
+}
+
+.dot {
+  color: #9ab0bf;
+}
+
+.copy {
+  font-size: 0.9rem;
+  color: #355469;
+}
+
+/* Social Container */
+.social-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Social Buttons */
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+}
+
+.social-btn img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-btn:hover img {
+  transform: translateY(-4px) scale(1.1);
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-bar {
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+  }
+
+  .social-container {
+    grid-column: 1 / -1;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .copy {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+
+  .social-btn img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .brand {
+    text-align: center;
+  }
+
+  .footer-nav {
+    grid-column: 1 / -1;
+    gap: 0.3rem;
+  }
+
+  .footer-link {
+    font-size: 0.85rem;
+    padding: 2px 4px;
+  }
+
+  .social-btn img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+}

@@ -1,6 +1,7 @@
 // Minimal API helper for auth (register / login)
-const USER_BASE_URL = 'http://localhost:3000/user';
-const EVENT_BASE_URL = 'http://localhost:3000/event';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const USER_BASE_URL = `${API_BASE_URL}/user`;
+const EVENT_BASE_URL = `${API_BASE_URL}/event`;
 
 async function request(path, options = {}) {
   const headers = options.headers ? { ...options.headers } : {};

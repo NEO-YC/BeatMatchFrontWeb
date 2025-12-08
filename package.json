@@ -1,6 +1,6 @@
 {
   "engines": {
-  "node": "18.x"
+  "node": ">=20.19.0"
 }
 ,
   "name": "vite-project",

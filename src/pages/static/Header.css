@@ -32,42 +32,177 @@ header {
   padding: 2vh 2vw; /* Relative padding */
 }
 
-/* Mobile tweaks */
+/* Burger Menu Button (hidden on desktop) */
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1002;
+  transition: all 0.3s ease;
+}
+
+.burger-menu span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(135deg, #ec4899, #06b6d4);
+  border-radius: 3px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header.mobile-menu-open .burger-menu span:nth-child(1) {
+  transform: translateY(10.5px) rotate(45deg);
+}
+
+header.mobile-menu-open .burger-menu span:nth-child(2) {
+  opacity: 0;
+}
+
+header.mobile-menu-open .burger-menu span:nth-child(3) {
+  transform: translateY(-10.5px) rotate(-45deg);
+}
+
+/* Mobile Navigation Drawer */
 @media (max-width: 640px) {
   .header-content {
     max-width: 100%;
-    padding: 12px 14px;
-    gap: 10px;
-    flex-wrap: wrap;
+    padding: 14px 16px;
+    position: relative;
   }
 
-  .logo-section {
-    flex: 1 1 100%;
+  .burger-menu {
+    display: flex;
+  }
+
+  .logo-section h1 {
+    font-size: 24px;
+  }
+
+  .site-logo {
+    height: 32px;
+  }
+
+  /* Hide nav by default on mobile */
+  .right-actions {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  header.mobile-menu-open .right-actions {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .header-links {
-    flex: 1 1 100%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 8px;
+    position: absolute;
+    top: 70px;
+    left: 12px;
+    right: 12px;
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  header.mobile-menu-open .header-links {
+    transform: translateY(0);
+    opacity: 1;
   }
 
   .header-link {
-    flex: 1 1 calc(50% - 12px);
+    width: 100%;
     text-align: center;
-    padding: 10px 12px;
-    font-size: 0.95rem;
+    padding: 14px 16px;
+    font-size: 16px;
+    background: #f8fafc;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
   }
 
-  .right-actions {
-    width: 100%;
-    justify-content: flex-start;
-    gap: 10px;
-    flex-wrap: wrap;
+  .header-link.active {
+    background: linear-gradient(135deg, #fdf4ff, #ecfeff);
+  }
+
+  /* User button and login in mobile drawer */
+  .user-menu {
+    position: absolute;
+    top: calc(70px + 180px);
+    left: 12px;
+    right: 12px;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+  }
+
+  header.mobile-menu-open .user-menu {
+    transform: translateY(0);
+    opacity: 1;
   }
 
   .user-button {
-    padding: 8px 12px;
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  .login-button {
+    position: absolute;
+    top: calc(70px + 180px);
+    left: 12px;
+    right: 12px;
+    text-align: center;
+    padding: 16px;
+    font-size: 18px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(236, 72, 153, 0.4);
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+  }
+
+  header.mobile-menu-open .login-button {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Dropdown menu adjustments for mobile */
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    right: 0;
+    width: 100%;
   }
 }
 

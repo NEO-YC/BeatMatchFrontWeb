@@ -14,6 +14,7 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [deleteStep, setDeleteStep] = useState(1)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const menuRef = useRef(null)
   const navigate = useNavigate()
 
@@ -140,26 +141,50 @@ function Header() {
 
   return (
     <div>
-      <header>
+      <header className={mobileMenuOpen ? 'mobile-menu-open' : ''}>
         <div className="header-content">
           <div className="logo-section">
             <img src="/BMproject.png" alt="BeatMatch" className="site-logo" />
             <h1>BeatMatch</h1>
           </div>
 
+          <button 
+            className="burger-menu"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="פתח תפריט"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+
           <div className="right-actions">
             <div className="header-links">
-              <NavLink to="/events" className={({isActive}) => `header-link${isActive ? ' active' : ''}`}>
+              <NavLink 
+                to="/events" 
+                className={({isActive}) => `header-link${isActive ? ' active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 לוח אירועים
               </NavLink>
-              <NavLink to="/search" className={({isActive}) => `header-link${isActive ? ' active' : ''}`}>
+              <NavLink 
+                to="/search" 
+                className={({isActive}) => `header-link${isActive ? ' active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 <svg className="icon-svg" width="18" height="13" viewBox="0 0 24 15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <circle cx="11" cy="11" r="7"></circle>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
                 <span className="search-label"> חיפוש</span>
               </NavLink>
-              <NavLink to="/" className={({isActive}) => `header-link${isActive ? ' active' : ''}`}>דף הבית</NavLink>
+              <NavLink 
+                to="/" 
+                className={({isActive}) => `header-link${isActive ? ' active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                דף הבית
+              </NavLink>
 
             </div>
 
@@ -246,7 +271,11 @@ function Header() {
                 )}
               </div>
             ) : (
-              <NavLink to="/login" className="login-button">
+              <NavLink 
+                to="/login" 
+                className="login-button"
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 התחבר / הירשם
               </NavLink>
             )}

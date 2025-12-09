@@ -1,3 +1,2 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Global styles are defined in individual CSS files per component */
+/* No build-time CSS framework is used - using vanilla CSS */

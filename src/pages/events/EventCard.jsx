@@ -1,8 +1,10 @@
 // כרטיס אירוע נקי ופשוט עם עיצוב תואם האתר
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './EventCard.css'
 
 export default function EventCard({ event, currentUserId, isAdmin, onUpdate, onDelete }) {
+  const navigate = useNavigate()
   const [isEditing, setIsEditing] = useState(false)
   const [editData, setEditData] = useState({
     eventType: event.eventType,
@@ -115,7 +117,11 @@ export default function EventCard({ event, currentUserId, isAdmin, onUpdate, onD
     <div className="event-card">
       {/* פרטי מפרסם - קישור לדף המוזיקאי */}
       {event.createdBy && (
-        <a href={`/musician/${event.createdBy._id}`} className="event-publisher-link">
+        <div 
+          onClick={() => navigate(`/musician/${event.createdBy._id}`)} 
+          className="event-publisher-link"
+          style={{ cursor: 'pointer' }}
+        >
           <div className="event-publisher">
             <div className="publisher-avatar">
               {event.createdBy.musicianProfile?.[0]?.profilePicture ? (
@@ -134,7 +140,7 @@ export default function EventCard({ event, currentUserId, isAdmin, onUpdate, onD
               <div className="publisher-label">מפרסם האירוע</div>
             </div>
           </div>
-        </a>
+        </div>
       )}
 
       <div className="event-card-header">

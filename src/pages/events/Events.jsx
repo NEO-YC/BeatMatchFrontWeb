@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { eventsApi } from '../../services/api';
 import EventCard from './EventCard';
 import './Events.css';
+import { useNavigate } from 'react-router-dom';
 
 // דף לוח אירועים: אם המשתמש אינו מוזיקאי פעיל, נראה הודעת תשלום.
 // אם הוא פעיל — נטען ונציג אירועים פתוחים.
 export default function Events({ isAdmin, user }) {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [events, setEvents] = useState([]);
@@ -62,8 +64,8 @@ export default function Events({ isAdmin, user }) {
             הירשם לאתר כדי לפרסם אירועים ולחפש מוזיקאים מקצועיים לאירוע שלך!
           </p>
           <div className="payment-actions">
-            <a href="/register" className="btn-primary">הירשם עכשיו</a>
-            <a href="/login" className="btn-secondary">יש לי חשבון - התחבר</a>
+             <button onClick={() => navigate('/register')} className="btn-primary">הירשם עכשיו</button>
+            <button onClick={() => navigate('/login')} className="btn-secondary">יש לי חשבון - התחבר</button>
           </div>
         </div>
       </div>
@@ -80,8 +82,8 @@ export default function Events({ isAdmin, user }) {
             רוצה לראות אירועים ולהגדיל הכנסות? הפוך את הפרופיל שלך לפעיל בתשלום קצר ותהנה מגישה מלאה ללוח האירועים.
           </p>
           <div className="payment-actions">
-            <a href="/musician/edit" className="btn-primary">שדרג לחבר PRO</a>
-            <a href="/my-events" className="btn-secondary">האירועים שלי</a>
+           <button onClick={() => navigate('/musician/edit')} className="btn-primary">שדרג לחבר PRO</button>
+            <button onClick={() => navigate('/my-events')} className="btn-secondary">האירועים שלי</button>
           </div>
         </div>
       </div>

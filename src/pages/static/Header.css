@@ -32,6 +32,45 @@ header {
   padding: 2vh 2vw; /* Relative padding */
 }
 
+/* Mobile tweaks */
+@media (max-width: 640px) {
+  .header-content {
+    max-width: 100%;
+    padding: 12px 14px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .logo-section {
+    flex: 1 1 100%;
+  }
+
+  .header-links {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .header-link {
+    flex: 1 1 calc(50% - 12px);
+    text-align: center;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+
+  .right-actions {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .user-button {
+    padding: 8px 12px;
+  }
+}
+
 /* Right actions: links + login/user */
 .right-actions {
   display: flex;

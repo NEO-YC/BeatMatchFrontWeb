@@ -12,7 +12,7 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
   const [loadingMusicians, setLoadingMusicians] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [profileActive, setProfileActive] = useState(profileActiveProp === true);
-  const cardsToShow = 3;
+  const [cardsToShow, setCardsToShow] = useState(3);
 
   useEffect(() => {
     const loadRandomMusicians = async () => {
@@ -31,6 +31,23 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
     };
     loadRandomMusicians();
   }, []);
+
+  useEffect(() => {
+    const updateCardsToShow = () => {
+      const width = window.innerWidth;
+      if (width < 640) return setCardsToShow(1);
+      if (width < 1024) return setCardsToShow(2);
+      return setCardsToShow(3);
+    };
+
+    updateCardsToShow();
+    window.addEventListener('resize', updateCardsToShow);
+    return () => window.removeEventListener('resize', updateCardsToShow);
+  }, []);
+
+  useEffect(() => {
+    setCurrentIndex(prev => Math.min(prev, Math.max(randomMusicians.length - cardsToShow, 0)));
+  }, [cardsToShow, randomMusicians.length]);
 
 
 
@@ -60,8 +77,9 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
       setCurrentIndex(currentIndex - 1);
     }
   };
+
   const prevSlide = () => {
-    if (currentIndex < randomMusicians.length - cardsToShow) {
+    if (currentIndex < Math.max(randomMusicians.length - cardsToShow, 0)) {
       setCurrentIndex(currentIndex + 1);
     }
   };
@@ -138,7 +156,11 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
           <div className="carousel-wrapper">
             <div
               className="musicians-grid carousel"
-              style={{ transform: `translateX(${currentIndex * (100 / cardsToShow)}%)` }}
+              style={{
+                '--cards-to-show': cardsToShow,
+                '--carousel-gap': cardsToShow === 1 ? '16px' : cardsToShow === 2 ? '22px' : '30px',
+                transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)`
+              }}
             >
               {randomMusicians.map((musician, index) => {
                 const profile = musician.musicianProfile || {};

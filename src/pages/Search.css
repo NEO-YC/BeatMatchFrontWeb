@@ -514,26 +514,54 @@
 
 .filters-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 28px;
-  padding: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 28px;
   background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), inset 0 2px 0 rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(99, 102, 241, 0.1);
+  align-items: start;
+}
+
+/* הקוביה השלישית (סוגי אירועים) תהיה במרכז למטה */
+.filter-block:nth-child(3) {
+  grid-column: 1 / -1;
+  max-width: 640px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .filters-grid {
+    grid-template-columns: 1fr 1fr;
+    padding: 22px;
+  }
+}
+
+@media (max-width: 640px) {
+  .filters-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 16px;
+  }
+  .filter-block:nth-child(3) {
+    grid-column: 1;
+    max-width: 100%;
+  }
 }
 
 /* Filter Block - סטיילים חדשים! */
 .filter-block {
   background: white;
-  padding: 28px;
+  padding: 20px;
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   border: 2px solid #e5e7eb;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0;
 }
 
 .filter-block:hover {
@@ -545,17 +573,17 @@
 .filter-label {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.1rem;
+  gap: 8px;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin: 0;
-  padding-bottom: 12px;
+  margin: 0 0 10px 0;
+  padding-bottom: 10px;
   border-bottom: 2px solid #e5e7eb;
 }
 
 .label-icon {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
@@ -563,16 +591,17 @@
 .quick-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   direction: rtl;
+  margin-top: 0;
 }
 
 .quick-filter-btn {
-  padding: 12px 20px;
+  padding: 10px 16px;
   background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
   border: 2px solid #e5e7eb;
   border-radius: 12px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-primary);
   cursor: pointer;
@@ -609,25 +638,37 @@
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   min-height: 0;
   direction: rtl;
-  margin-bottom: 8px;
+  margin: 0 0 10px 0;
+  padding: 0;
 }
 
 .chips:empty {
-  display: none;
+  display: none !important;
+}
+
+/* כשיש chips, מוסיף מרווח לפני ה-quick-filters */
+.filter-block .chips {
+  margin-bottom: 10px;
+}
+
+.filter-block .chips:empty {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
 }
 
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
+  gap: 6px;
+  padding: 8px 12px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border-radius: 20px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
   transition: all 0.3s ease;

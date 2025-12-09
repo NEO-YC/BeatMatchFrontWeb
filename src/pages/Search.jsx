@@ -341,46 +341,6 @@ export default function Search() {
 
               <div className="filter-block">
                 <label className="filter-label">
-                  <span className="label-icon">🎼</span>
-                  <span>סגנון מוזיקלי</span>
-                </label>
-                <div className="chips">
-                  {genres.map((g) => (
-                    <span className="chip chip-selected" key={g}>
-                      <button
-                        type="button"
-                        onClick={() => removeTag(setGenres, g)}
-                      >
-                        ×
-                      </button>
-                      {g}
-                    </span>
-                  ))}
-                </div>
-                <div className="quick-filters">
-                  {SUGGESTED_GENRES.map((s) => (
-                    <button
-                      key={s}
-                      type="button"
-                      className={`quick-filter-btn ${
-                        genres.includes(s) ? "active" : ""
-                      }`}
-                      onClick={() => {
-                        if (genres.includes(s)) {
-                          removeTag(setGenres, s);
-                        } else {
-                          addTag(setGenres, s);
-                        }
-                      }}
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="filter-block">
-                <label className="filter-label">
                   <span className="label-icon">🎉</span>
                   <span>סוגי אירועים</span>
                 </label>
@@ -410,6 +370,46 @@ export default function Search() {
                           removeTag(setEvents, s);
                         } else {
                           addTag(setEvents, s);
+                        }
+                      }}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="filter-block">
+                <label className="filter-label">
+                  <span className="label-icon">🎼</span>
+                  <span>סגנון מוזיקלי</span>
+                </label>
+                <div className="chips">
+                  {genres.map((g) => (
+                    <span className="chip chip-selected" key={g}>
+                      <button
+                        type="button"
+                        onClick={() => removeTag(setGenres, g)}
+                      >
+                        ×
+                      </button>
+                      {g}
+                    </span>
+                  ))}
+                </div>
+                <div className="quick-filters">
+                  {SUGGESTED_GENRES.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      className={`quick-filter-btn ${
+                        genres.includes(s) ? "active" : ""
+                      }`}
+                      onClick={() => {
+                        if (genres.includes(s)) {
+                          removeTag(setGenres, s);
+                        } else {
+                          addTag(setGenres, s);
                         }
                       }}
                     >

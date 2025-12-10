@@ -95,6 +95,18 @@ function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
+  // Handle mobile drawer body class
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileMenuOpen])
+
   const handleLogout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('rememberedEmail')
@@ -141,12 +153,27 @@ function Header() {
 
   return (
     <div>
+      {/* Mobile Menu Backdrop - Closes drawer when clicked */}
+      {mobileMenuOpen && (
+        <div 
+          className="mobile-backdrop" 
+          onClick={(e) => {
+            if (e.target.classList.contains('mobile-backdrop')) {
+              setMobileMenuOpen(false);
+              setIsMenuOpen(false);
+            }
+          }}
+          role="presentation"
+          aria-hidden="true"
+        />
+      )}
+
       <header className={mobileMenuOpen ? 'mobile-menu-open' : ''}>
         <div className="header-content">
-          <div className="logo-section">
+          <NavLink to="/" className="logo-section" onClick={() => setMobileMenuOpen(false)}>
             <img src="/BMproject.png" alt="BeatMatch" className="site-logo" />
             <h1>BeatMatch</h1>
-          </div>
+          </NavLink>
 
           <button 
             className="burger-menu"
@@ -158,127 +185,290 @@ function Header() {
             <span />
           </button>
 
-          <div className="right-actions">
-            <div className="header-links">
-              <NavLink 
-                to="/events" 
-                className={({isActive}) => `header-link${isActive ? ' active' : ''}`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                לוח אירועים
-              </NavLink>
-              <NavLink 
-                to="/search" 
-                className={({isActive}) => `header-link${isActive ? ' active' : ''}`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <svg className="icon-svg" width="18" height="13" viewBox="0 0 24 15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <circle cx="11" cy="11" r="7"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                <span className="search-label"> חיפוש</span>
-              </NavLink>
-              <NavLink 
-                to="/" 
-                className={({isActive}) => `header-link${isActive ? ' active' : ''}`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                דף הבית
-              </NavLink>
+          {/* Desktop Navigation */}
+          <div className="header-links">
+            <NavLink 
+              to="/events" 
+              className={({isActive}) => `header-link${isActive ? ' active' : ''}`}
+            >
+              לוח אירועים
+            </NavLink>
+            <NavLink 
+              to="/search" 
+              className={({isActive}) => `header-link${isActive ? ' active' : ''}`}
+            >
+              <svg className="icon-svg" width="18" height="13" viewBox="0 0 24 15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <span className="search-label"> חיפוש</span>
+            </NavLink>
+            <NavLink 
+              to="/" 
+              className={({isActive}) => `header-link${isActive ? ' active' : ''}`}
+            >
+              דף הבית
+            </NavLink>
+          </div>
 
-            </div>
-
-            {user ? (
-              <div className="user-menu" ref={menuRef}>
-                <button
-                  className="user-button"
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                >
-                  {profilePicture ? (
-                    <img src={profilePicture} alt="Profile" className="user-icon" />
-                  ) : (
-                    <span className="user-icon">
-                      {user.displayName.charAt(0).toUpperCase()}
-                    </span>
-                  )}
-                  <span className="user-name">
-                    {user.displayName}
-                    {isActive && <span className="pro-badge-header">PRO</span>}
+          {/* Desktop User Menu / Login */}
+          {user ? (
+            <div className="user-menu" ref={menuRef}>
+              <button
+                className="user-button"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {profilePicture ? (
+                  <img src={profilePicture} alt="Profile" className="user-icon" />
+                ) : (
+                  <span className="user-icon">
+                    {user.displayName.charAt(0).toUpperCase()}
                   </span>
-
-                  <span className={`arrow ${isMenuOpen ? 'open' : ''}`}>▼</span>
-                </button>
-                
-                {isMenuOpen && (
-                  <div className="dropdown-menu">
-                    {hasProfile ? (
-                      <NavLink 
-                        to="/musician/edit" 
-                        className="menu-item"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        <span className="menu-icon">⚙</span>
-                        ערוך פרופיל
-                      </NavLink>
-                    ) : (
-                      <NavLink 
-                        to="/musician/create" 
-                        className="menu-item"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        <span className="menu-icon">➕</span>
-                        צור פרופיל מוזיקאי
-                      </NavLink>
-                    )}
+                )}
+                <span className="user-name">
+                  {user.displayName}
+                  {isActive && <span className="pro-badge-header">PRO</span>}
+                </span>
+                <span className={`arrow ${isMenuOpen ? 'open' : ''}`}>▼</span>
+              </button>
+              
+              {isMenuOpen && (
+                <div className="dropdown-menu">
+                  {hasProfile ? (
                     <NavLink 
-                      to="/my-events" 
+                      to="/musician/edit" 
                       className="menu-item"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      <span className="menu-icon">📅</span>
-                      האירועים שלי
+                      <span className="menu-icon">⚙</span>
+                      ערוך פרופיל
                     </NavLink>
-                    {isAdmin && (
-                      <>
-                        <div className="menu-divider"></div>
-                        <NavLink 
-                          to="/admin" 
-                          className="menu-item admin"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          <span className="menu-icon">👑</span>
-                          לוח בקרה
-                        </NavLink>
-                      </>
-                    )}
-                    <div className="menu-divider"></div>
-                    <button 
-                      className="menu-item logout"
-                      onClick={handleLogout}
+                  ) : (
+                    <NavLink 
+                      to="/musician/create" 
+                      className="menu-item"
+                      onClick={() => setIsMenuOpen(false)}
                     >
-                      <span className="menu-icon">→</span>
-                      התנתק
-                    </button>
-                    <div className="menu-divider"></div>
-                    <button 
-                      className="menu-item delete"
-                      onClick={handleDeleteAccount}
-                    >
-                      <span className="menu-icon">⚠</span>
-                      מחק חשבון
-                    </button>
+                      <span className="menu-icon">➕</span>
+                      צור פרופיל מוזיקאי
+                    </NavLink>
+                  )}
+                  <NavLink 
+                    to="/my-events" 
+                    className="menu-item"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span className="menu-icon">📅</span>
+                    האירועים שלי
+                  </NavLink>
+                  {isAdmin && (
+                    <>
+                      <div className="menu-divider"></div>
+                      <NavLink 
+                        to="/admin" 
+                        className="menu-item admin"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <span className="menu-icon">👑</span>
+                        לוח בקרה
+                      </NavLink>
+                    </>
+                  )}
+                  <div className="menu-divider"></div>
+                  <button 
+                    className="menu-item logout"
+                    onClick={handleLogout}
+                  >
+                    <span className="menu-icon">→</span>
+                    התנתק
+                  </button>
+                  <div className="menu-divider"></div>
+                  <button 
+                    className="menu-item delete"
+                    onClick={handleDeleteAccount}
+                  >
+                    <span className="menu-icon">⚠</span>
+                    מחק חשבון
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <NavLink 
+              to="/login" 
+              className="login-button"
+            >
+              התחבר / הירשם
+            </NavLink>
+          )}
+
+          {/* Mobile Drawer */}
+          <div className="right-actions">
+            {user ? (
+              <>
+                {/* User Profile Section - Top of Drawer */}
+                <div className="drawer-user-profile">
+                  {profilePicture ? (
+                    <img src={profilePicture} alt="Profile" className="drawer-user-avatar" />
+                  ) : (
+                    <div className="drawer-user-avatar">
+                      {user.displayName.charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                  <div className="drawer-user-info">
+                    <h3 className="drawer-user-name">
+                      {user.displayName}
+                      {isActive && <span className="pro-badge-header">PRO</span>}
+                    </h3>
+                    <p className="drawer-user-email">{user.email}</p>
                   </div>
-                )}
-              </div>
+                </div>
+
+                {/* All Menu Items Combined */}
+                <div className="drawer-menu-items">
+                  <NavLink 
+                    to="/" 
+                    className={({isActive}) => `drawer-menu-item${isActive ? ' active' : ''}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="menu-icon">🏠</span>
+                    <span>דף הבית</span>
+                  </NavLink>
+
+                  <NavLink 
+                    to="/search" 
+                    className={({isActive}) => `drawer-menu-item${isActive ? ' active' : ''}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="menu-icon">🔍</span>
+                    <span>חיפוש מוזיקאים</span>
+                  </NavLink>
+
+                  <NavLink 
+                    to="/events" 
+                    className={({isActive}) => `drawer-menu-item${isActive ? ' active' : ''}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="menu-icon">🎉</span>
+                    <span>לוח אירועים</span>
+                  </NavLink>
+
+                  {hasProfile ? (
+                    <NavLink 
+                      to="/musician/edit" 
+                      className={({isActive}) => `drawer-menu-item${isActive ? ' active' : ''}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <span className="menu-icon">⚙</span>
+                      <span>ערוך פרופיל</span>
+                    </NavLink>
+                  ) : (
+                    <NavLink 
+                      to="/musician/create" 
+                      className={({isActive}) => `drawer-menu-item${isActive ? ' active' : ''}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <span className="menu-icon">➕</span>
+                      <span>צור פרופיל מוזיקאי</span>
+                    </NavLink>
+                  )}
+
+                  <NavLink 
+                    to="/my-events" 
+                    className={({isActive}) => `drawer-menu-item${isActive ? ' active' : ''}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="menu-icon">📅</span>
+                    <span>האירועים שלי</span>
+                  </NavLink>
+
+                  {isAdmin && (
+                    <NavLink 
+                      to="/admin" 
+                      className={({isActive}) => `drawer-menu-item admin${isActive ? ' active' : ''}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <span className="menu-icon">👑</span>
+                      <span>לוח בקרה</span>
+                    </NavLink>
+                  )}
+
+                  <button 
+                    className="drawer-menu-item logout"
+                    onClick={() => {
+                      handleLogout();
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    <span className="menu-icon">🚪</span>
+                    <span>התנתק</span>
+                  </button>
+
+                  <button 
+                    className="drawer-menu-item delete"
+                    onClick={() => {
+                      handleDeleteAccount();
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    <span className="menu-icon">⚠</span>
+                    <span>מחק חשבון</span>
+                  </button>
+                </div>
+              </>
             ) : (
-              <NavLink 
-                to="/login" 
-                className="login-button"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                התחבר / הירשם
-              </NavLink>
+              <>
+                {/* Not Logged In - Show Login Button at Top */}
+                <div className="drawer-login-section">
+                  <NavLink 
+                    to="/login" 
+                    className="drawer-login-button"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="login-icon">🎵</span>
+                    <div>
+                      <div className="login-title">התחבר / הירשם</div>
+                      <div className="login-subtitle">הצטרף לקהילת המוזיקאים</div>
+                    </div>
+                  </NavLink>
+                </div>
+
+                {/* Navigation Links for Non-Logged Users */}
+                <div className="drawer-menu-items">
+                  <NavLink 
+                    to="/" 
+                    className={({isActive}) => `drawer-menu-item${isActive ? ' active' : ''}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="menu-icon">🏠</span>
+                    <span>דף הבית</span>
+                  </NavLink>
+
+                  <NavLink 
+                    to="/search" 
+                    className={({isActive}) => `drawer-menu-item${isActive ? ' active' : ''}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="menu-icon">🔍</span>
+                    <span>חיפוש מוזיקאים</span>
+                  </NavLink>
+
+                  <NavLink 
+                    to="/events" 
+                    className={({isActive}) => `drawer-menu-item${isActive ? ' active' : ''}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="menu-icon">🎉</span>
+                    <span>לוח אירועים</span>
+                  </NavLink>
+                </div>
+              </>
             )}
+
+            <div className="drawer-footer">
+              <p className="drawer-footer-text">BeatMatch © 2025</p>
+              <p className="drawer-footer-text">הפלטפורמה המובילה למוזיקאים בישראל 🎵</p>
+            </div>
           </div>
         </div>
       </header>

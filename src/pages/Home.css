@@ -1438,105 +1438,158 @@
 
   .home-hero {
     flex-direction: column-reverse;
-    padding: 60px 40px;
-    gap: 40px;
+    padding: 40px 30px;
+    gap: 30px;
     min-height: auto;
+    align-items: center;
   }
 
   .home-hero-text {
     text-align: center;
   }
 
+  .home-hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
   .home-main-title {
-    font-size: 56px;
+    font-size: 46px;
   }
 
   .home-subtitle {
-    font-size: 20px;
+    font-size: 18px;
+  }
+
+  .home-hero-buttons {
+    justify-content: center;
   }
 
   .home-benefits-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .home-events-section {
+    padding: 40px 30px;
+  }
+  
+  .events-mini-cards {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
   .home-hero {
-    padding: 40px 24px;
+    padding: 30px 20px;
   }
 
   .home-main-title {
-    font-size: 42px;
+    font-size: 36px;
+    line-height: 1.2;
   }
 
   .home-subtitle {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .home-subtitle strong {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .hero-badge {
-    font-size: 15px;
-    padding: 12px 24px;
+    font-size: 13px;
+    padding: 10px 20px;
   }
 
   .home-musician-label {
-    font-size: 18px;
-    padding: 12px 24px;
+    font-size: 17px;
+    padding: 10px 22px;
   }
 
   .home-hero-visual {
-    min-height: 400px;
+    min-height: auto;
+    padding-top: 20px;
   }
 
   .home-hero-circle {
-    width: 280px;
-    height: 280px;
+    width: 200px;
+    height: 200px;
   }
 
   .home-hero-note {
-    font-size: 120px;
+    font-size: 90px;
+  }
+  
+  .home-hero-small {
+    font-size: 14px;
+    max-width: 280px;
+  }
+
+  .home-status-card,
+  .home-musician-cta {
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .home-status-title {
+    font-size: 20px;
+  }
+  
+  .home-musician-description {
+    font-size: 17px;
   }
 
   .home-about-section {
-    padding: 40px 30px;
-    margin: 60px 20px;
+    padding: 35px 24px;
+    margin: 40px 16px;
   }
 
   .home-about-section h2 {
-    font-size: 32px;
+    font-size: 28px;
+  }
+  
+  .home-about-section p {
+    font-size: 15px;
   }
 
   .home-pro-exclusive {
-    padding: 50px 30px;
-    margin: 60px 20px;
+    padding: 40px 24px;
+    margin: 40px 16px;
   }
 
   .pro-exclusive-title {
-    font-size: 32px;
+    font-size: 28px;
+  }
+  
+  .pro-exclusive-text {
+    font-size: 16px;
   }
 
   .pro-benefits-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  
+  .pro-benefit-item {
+    padding: 20px 16px;
   }
 
   .home-upgrade-banner {
-    padding: 40px 30px;
-    margin: 60px 20px;
+    padding: 35px 24px;
+    margin: 40px 16px;
   }
 
   .upgrade-banner-content {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 24px;
     text-align: center;
   }
 
   .upgrade-banner-icon {
-    font-size: 60px;
+    font-size: 56px;
   }
 
   .upgrade-banner-text {
@@ -1544,59 +1597,135 @@
   }
 
   .upgrade-banner-title {
-    font-size: 28px;
+    font-size: 26px;
+  }
+  
+  .upgrade-banner-subtitle {
+    font-size: 16px;
   }
 
   .upgrade-features {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .upgrade-feature {
+    font-size: 14px;
   }
 
   .home-musicians-gallery {
-    padding: 60px 24px;
+    padding: 40px 20px;
   }
 
   .home-musicians-gallery h2 {
-    font-size: 36px;
+    font-size: 32px;
+  }
+  
+  .gallery-subtitle {
+    font-size: 15px;
   }
 
   .carousel-container {
-    padding: 0 50px;
+    padding: 0 45px;
   }
 
   .musicians-grid.carousel .musician-card {
     flex-basis: calc((100% - (var(--carousel-gap) * (var(--cards-to-show) - 1))) / var(--cards-to-show));
+    min-width: 0;
   }
 
   .carousel-arrow {
-    width: 45px;
-    height: 45px;
-    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  
+  .carousel-arrow-left {
+    left: 2px;
+  }
+  
+  .carousel-arrow-right {
+    right: 2px;
   }
 
   .musicians-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
+  }
+  
+  .musician-card {
+    min-width: 0;
+  }
+  
+  .musician-card-image {
+    height: 200px;
+  }
+  
+  .musician-card-content {
+    padding: 20px;
+  }
+  
+  .musician-card-content h3 {
+    font-size: 20px;
   }
 
   .home-benefits {
-    padding: 60px 24px;
+    padding: 50px 20px;
   }
 
   .home-benefits h2 {
-    font-size: 36px;
+    font-size: 32px;
   }
 
   .home-benefits-grid {
     grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  
+  .benefit-card {
+    padding: 28px 20px;
+    min-height: auto;
+  }
+  
+  .benefit-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .benefit-card p {
+    font-size: 0.95rem;
+  }
+
+  .home-events-section {
+    padding: 40px 24px;
+    margin: 40px 16px;
+  }
+  
+  .home-events-section h2 {
+    font-size: 28px;
+  }
+  
+  .events-mini-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .home-how-it-works {
-    padding: 60px 30px;
-    margin: 60px 20px;
+    padding: 50px 24px;
+    margin: 40px 16px;
   }
 
   .home-how-it-works h2 {
-    font-size: 36px;
+    font-size: 32px;
+    margin-bottom: 36px;
+  }
+  
+  .how-section {
+    margin-bottom: 40px;
+  }
+  
+  .how-section-title {
+    font-size: 24px;
+    margin-bottom: 24px;
   }
 
   .btn {
@@ -1605,49 +1734,30 @@
   }
 
   .hero-search-btn {
-    font-size: 18px;
-    padding: 16px 32px;
+    font-size: 17px;
+    padding: 15px 32px;
+  }
+
+  .home-hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .home-hero-buttons .btn {
+    width: 100%;
   }
 
   .home-musician-buttons {
     flex-direction: column;
+    align-items: stretch;
   }
 
   .home-musician-buttons .btn {
     width: 100%;
   }
 
-  .home-pro-exclusive {
-    padding: 40px 20px;
-  }
-
-  .pro-exclusive-title {
-    font-size: 28px;
-  }
-
-  .pro-badge-large {
-    font-size: 14px;
-    padding: 8px 20px;
-  }
-
-  .pro-benefits-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .home-upgrade-banner {
-    padding: 30px 20px;
-  }
-
-  .upgrade-banner-title {
-    font-size: 24px;
-  }
-
-  .upgrade-banner-subtitle {
-    font-size: 16px;
-  }
-
   .upgrade-price-amount {
-    font-size: 36px;
+    font-size: 38px;
   }
 
   .upgrade-btn {
@@ -1656,22 +1766,30 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
+  .home-hero {
+    padding: 24px 16px;
+  }
+
   .home-main-title {
-    font-size: 34px;
+    font-size: 30px;
+    line-height: 1.25;
   }
 
   .home-subtitle {
-    font-size: 16px;
+    font-size: 15px;
+    line-height: 1.6;
   }
 
   .home-subtitle strong {
-    font-size: 18px;
+    font-size: 16px;
+    margin-top: 8px;
   }
 
   .hero-badge {
-    font-size: 14px;
-    padding: 10px 20px;
+    font-size: 12px;
+    padding: 9px 18px;
+    margin-bottom: 20px;
   }
 
   .home-musician-label {
@@ -1680,47 +1798,368 @@
   }
 
   .home-hero-visual {
-    min-height: 300px;
+    min-height: auto;
+    padding-top: 10px;
   }
 
   .home-hero-circle {
-    width: 220px;
-    height: 220px;
+    width: 180px;
+    height: 180px;
   }
 
   .home-hero-note {
-    font-size: 90px;
+    font-size: 80px;
+  }
+  
+  .home-hero-small {
+    font-size: 13px;
+    max-width: 260px;
+  }
+
+  .home-status-card,
+  .home-musician-cta {
+    padding: 20px;
+    border-radius: 16px;
+  }
+  
+  .home-musician-text {
+    font-size: 15px;
+  }
+  
+  .home-musician-description {
+    font-size: 16px;
+  }
+
+  .home-about-section {
+    padding: 30px 20px;
+    margin: 30px 12px;
+  }
+
+  .home-about-section h2 {
+    font-size: 26px;
+  }
+  
+  .home-about-section p {
+    font-size: 14px;
+  }
+
+  .home-pro-exclusive {
+    padding: 35px 20px;
+    margin: 30px 12px;
+  }
+
+  .pro-exclusive-title {
+    font-size: 26px;
+  }
+  
+  .pro-exclusive-text {
+    font-size: 15px;
+  }
+
+  .pro-badge-large {
+    font-size: 13px;
+    padding: 8px 18px;
+  }
+
+  .pro-benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .pro-benefit-item {
+    padding: 18px 14px;
+  }
+  
+  .pro-benefit-icon {
+    font-size: 2rem;
+  }
+  
+  .pro-benefit-content h4 {
+    font-size: 1rem;
+  }
+  
+  .pro-benefit-content p {
+    font-size: 0.85rem;
+  }
+
+  .home-upgrade-banner {
+    padding: 30px 20px;
+    margin: 30px 12px;
+  }
+
+  .upgrade-banner-icon {
+    font-size: 50px;
+  }
+
+  .upgrade-banner-title {
+    font-size: 24px;
+  }
+
+  .upgrade-banner-subtitle {
+    font-size: 15px;
+  }
+
+  .upgrade-price-amount {
+    font-size: 36px;
+  }
+  
+  .upgrade-price-period {
+    font-size: 13px;
+  }
+
+  .upgrade-btn {
+    font-size: 17px;
+    padding: 15px 28px;
+  }
+  
+  .upgrade-guarantee {
+    font-size: 12px;
+  }
+  
+  .upgrade-banner-cta {
+    padding: 24px 20px;
+  }
+
+  .home-musicians-gallery {
+    padding: 35px 16px;
+  }
+
+  .home-musicians-gallery h2 {
+    font-size: 28px;
+  }
+  
+  .gallery-subtitle {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  .carousel-container {
+    padding: 0 16px;
+  }
+
+  .carousel-arrow {
+    display: none !important;
+  }
+  
+  .musician-card-image {
+    height: 180px;
+  }
+  
+  .musician-card-content {
+    padding: 18px;
+  }
+  
+  .musician-card-content h3 {
+    font-size: 18px;
+  }
+  
+  .musician-instruments {
+    font-size: 15px;
+  }
+  
+  .musician-location {
+    font-size: 13px;
+  }
+  
+  .genre-tag {
+    font-size: 12px;
+    padding: 5px 12px;
+  }
+
+  .home-benefits {
+    padding: 40px 16px;
+  }
+
+  .home-benefits h2 {
+    font-size: 28px;
+  }
+
+  .home-benefits-grid {
+    gap: 16px;
+  }
+  
+  .benefit-card {
+    padding: 26px 18px;
+  }
+  
+  .benefit-card h3 {
+    font-size: 1.15rem;
+  }
+  
+  .benefit-card p {
+    font-size: 0.9rem;
+  }
+
+  .home-events-section {
+    padding: 35px 20px;
+    margin: 30px 12px;
+  }
+  
+  .home-events-section h2 {
+    font-size: 26px;
+  }
+  
+  .events-icon {
+    font-size: 48px;
+  }
+  
+  .events-intro {
+    font-size: 15px;
+  }
+  
+  .mini-card {
+    padding: 20px 16px;
+  }
+  
+  .mini-icon {
+    font-size: 36px;
+  }
+  
+  .mini-card h4 {
+    font-size: 17px;
+  }
+  
+  .mini-card p {
+    font-size: 13px;
+  }
+
+  .home-how-it-works {
+    padding: 40px 20px;
+    margin: 30px 12px;
+  }
+
+  .home-how-it-works h2 {
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+  
+  .how-section {
+    margin-bottom: 35px;
+  }
+  
+  .how-section-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  
+  .step-card {
+    padding: 26px 18px;
+  }
+  
+  .step-number {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+  
+  .step-card h4 {
+    font-size: 18px;
+  }
+  
+  .step-card p {
+    font-size: 14px;
+  }
+
+  .btn {
+    font-size: 15px;
+    padding: 13px 26px;
+  }
+
+  .hero-search-btn {
+    font-size: 16px;
+    padding: 14px 28px;
+  }
+  
+  .events-actions .btn {
+    font-size: 15px;
+    padding: 13px 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-hero {
+    padding: 20px 14px;
+  }
+
+  .home-main-title {
+    font-size: 26px;
+  }
+
+  .home-subtitle {
+    font-size: 14px;
+  }
+
+  .home-subtitle strong {
+    font-size: 15px;
+  }
+
+  .hero-badge {
+    font-size: 11px;
+    padding: 8px 16px;
+  }
+
+  .home-musician-label {
+    font-size: 15px;
+    padding: 9px 18px;
+  }
+
+  .home-hero-circle {
+    width: 160px;
+    height: 160px;
+  }
+
+  .home-hero-note {
+    font-size: 70px;
+  }
+  
+  .home-hero-small {
+    font-size: 12px;
+    max-width: 240px;
   }
 
   .home-about-section h2,
   .home-musicians-gallery h2,
   .home-benefits h2,
   .home-how-it-works h2 {
-    font-size: 28px;
-  }
-
-  .benefit-card {
-    padding: 30px;
-  }
-
-  .step-card {
-    padding: 30px 20px;
-  }
-
-  .step-number {
-    width: 50px;
-    height: 50px;
     font-size: 24px;
   }
 
+  .benefit-card {
+    padding: 24px 16px;
+  }
+
   .carousel-container {
-    padding: 0 32px;
+    padding: 0 34px;
   }
 
   .carousel-arrow {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+  
+  .musician-card-image {
+    height: 160px;
+  }
+  
+  .musician-placeholder span {
+    font-size: 60px;
+  }
+  
+  .upgrade-banner-title {
+    font-size: 22px;
+  }
+  
+  .upgrade-price-amount {
+    font-size: 32px;
+  }
+  
+  .pro-exclusive-title {
+    font-size: 24px;
+  }
+  
+  .home-events-section h2 {
+    font-size: 24px;
   }
 }
 

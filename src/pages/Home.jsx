@@ -73,14 +73,14 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
   const handleHideAll = () => setShowAll(false);
 
   const nextSlide = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+    if (currentIndex < Math.max(randomMusicians.length - cardsToShow, 0)) {
+      setCurrentIndex(currentIndex + 1);
     }
   };
 
   const prevSlide = () => {
-    if (currentIndex < Math.max(randomMusicians.length - cardsToShow, 0)) {
-      setCurrentIndex(currentIndex + 1);
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
     }
   };
 
@@ -148,11 +148,11 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
         <div className="carousel-container">
           {showCarousel && (
             <button
-              className={`carousel-arrow carousel-arrow-right ${currentIndex >= randomMusicians.length - cardsToShow ? 'disabled' : ''}`}
+              className={`carousel-arrow carousel-arrow-left ${currentIndex === 0 ? 'disabled' : ''}`}
               onClick={prevSlide}
-              disabled={currentIndex >= randomMusicians.length - cardsToShow}
+              disabled={currentIndex === 0}
             >
-              →
+              ←
             </button>
           )}
 
@@ -162,7 +162,7 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
               style={{
                 '--cards-to-show': cardsToShow,
                 '--carousel-gap': cardsToShow === 1 ? '16px' : cardsToShow === 2 ? '22px' : '30px',
-                transform: showCarousel ? `translateX(-${currentIndex * (100 / cardsToShow)}%)` : 'none'
+                transform: showCarousel ? `translateX(${currentIndex * (100 / cardsToShow)}%)` : 'none'
               }}
             >
               {randomMusicians.map((musician, index) => {
@@ -206,11 +206,11 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
 
           {showCarousel && (
             <button
-              className={`carousel-arrow carousel-arrow-left ${currentIndex === 0 ? 'disabled' : ''}`}
+              className={`carousel-arrow carousel-arrow-right ${currentIndex >= randomMusicians.length - cardsToShow ? 'disabled' : ''}`}
               onClick={nextSlide}
-              disabled={currentIndex === 0}
+              disabled={currentIndex >= randomMusicians.length - cardsToShow}
             >
-              ←
+              →
             </button>
           )}
         </div>

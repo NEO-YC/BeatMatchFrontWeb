@@ -299,6 +299,7 @@ export default function Search() {
           {/* Advanced Filters */}
           <div className={`filters ${filtersOpen ? "open" : "closed"}`}>
             <div className="filters-grid">
+              {/* כלי נגינה - שמאל */}
               <div className="filter-block">
                 <label className="filter-label">
                   <span className="label-icon">🎸</span>
@@ -339,6 +340,7 @@ export default function Search() {
                 </div>
               </div>
 
+              {/* סוגי אירועים - ימין */}
               <div className="filter-block">
                 <label className="filter-label">
                   <span className="label-icon">🎉</span>
@@ -379,6 +381,7 @@ export default function Search() {
                 </div>
               </div>
 
+              {/* סגנון מוזיקלי - מרכז למטה */}
               <div className="filter-block">
                 <label className="filter-label">
                   <span className="label-icon">🎼</span>

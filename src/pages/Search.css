@@ -514,20 +514,22 @@
 
 .filters-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-  padding: 28px;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 32px;
   background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), inset 0 2px 0 rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(99, 102, 241, 0.1);
   align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-/* הקוביה השלישית (סוגי אירועים) תהיה במרכז למטה */
+/* הקוביה השלישית (סגנון מוזיקלי) תהיה במרכז למטה */
 .filter-block:nth-child(3) {
   grid-column: 1 / -1;
-  max-width: 640px;
+  max-width: 620px;
   margin: 0 auto;
   width: 100%;
 }
@@ -535,15 +537,16 @@
 @media (max-width: 900px) {
   .filters-grid {
     grid-template-columns: 1fr 1fr;
-    padding: 22px;
+    padding: 24px;
+    gap: 20px;
   }
 }
 
 @media (max-width: 640px) {
   .filters-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 16px;
+    gap: 16px;
+    padding: 20px;
   }
   .filter-block:nth-child(3) {
     grid-column: 1;
@@ -554,7 +557,7 @@
 /* Filter Block - סטיילים חדשים! */
 .filter-block {
   background: white;
-  padding: 20px;
+  padding: 24px;
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   border: 2px solid #e5e7eb;
@@ -562,6 +565,19 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  min-height: 380px;
+}
+
+/* הקוביה השלישית (סגנון מוזיקלי) יכולה להיות יותר קצרה */
+.filter-block:nth-child(3) {
+  min-height: auto;
+}
+
+@media (max-width: 640px) {
+  .filter-block {
+    padding: 20px;
+    min-height: auto;
+  }
 }
 
 .filter-block:hover {
@@ -591,17 +607,23 @@
 .quick-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   direction: rtl;
   margin-top: 0;
 }
 
+@media (max-width: 640px) {
+  .quick-filters {
+    gap: 8px;
+  }
+}
+
 .quick-filter-btn {
-  padding: 10px 16px;
+  padding: 11px 18px;
   background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
   border: 2px solid #e5e7eb;
   border-radius: 12px;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: var(--text-primary);
   cursor: pointer;
@@ -609,6 +631,15 @@
   font-family: inherit;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .quick-filter-btn {
+    padding: 10px 15px;
+    font-size: 0.88rem;
+    flex: 0 1 auto;
+  }
 }
 
 .quick-filter-btn:hover {

@@ -143,15 +143,18 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
     }
 
     if (randomMusicians.length > 0) {
+      const showCarousel = randomMusicians.length > cardsToShow;
       return (
         <div className="carousel-container">
-          <button
-            className={`carousel-arrow carousel-arrow-right ${currentIndex >= randomMusicians.length - cardsToShow ? 'disabled' : ''}`}
-            onClick={prevSlide}
-            disabled={currentIndex >= randomMusicians.length - cardsToShow}
-          >
-            →
-          </button>
+          {showCarousel && (
+            <button
+              className={`carousel-arrow carousel-arrow-right ${currentIndex >= randomMusicians.length - cardsToShow ? 'disabled' : ''}`}
+              onClick={prevSlide}
+              disabled={currentIndex >= randomMusicians.length - cardsToShow}
+            >
+              →
+            </button>
+          )}
 
           <div className="carousel-wrapper">
             <div
@@ -159,7 +162,7 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
               style={{
                 '--cards-to-show': cardsToShow,
                 '--carousel-gap': cardsToShow === 1 ? '16px' : cardsToShow === 2 ? '22px' : '30px',
-                transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)`
+                transform: showCarousel ? `translateX(-${currentIndex * (100 / cardsToShow)}%)` : 'none'
               }}
             >
               {randomMusicians.map((musician, index) => {
@@ -201,13 +204,15 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
             </div>
           </div>
 
-          <button
-            className={`carousel-arrow carousel-arrow-left ${currentIndex === 0 ? 'disabled' : ''}`}
-            onClick={nextSlide}
-            disabled={currentIndex === 0}
-          >
-            ←
-          </button>
+          {showCarousel && (
+            <button
+              className={`carousel-arrow carousel-arrow-left ${currentIndex === 0 ? 'disabled' : ''}`}
+              onClick={nextSlide}
+              disabled={currentIndex === 0}
+            >
+              ←
+            </button>
+          )}
         </div>
       );
     }

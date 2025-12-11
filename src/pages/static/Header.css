@@ -471,6 +471,8 @@ header.mobile-menu-open .burger-menu span:nth-child(3) {
   display: flex;
   align-items: center;
   gap: 10px;
+  position: absolute;
+  right: 265px;
 }
 
 .user-menu {

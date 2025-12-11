@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import './MusicianProfile.css';
 import api from '../../services/api';
+import { reviewsApi } from '../../services/api';
+import RatingStar from '../../components/RatingStar';
+import ReviewCard from '../../components/ReviewCard';
+import ReviewForm from '../../components/ReviewForm';
 
 export default function MusicianProfile() {
   const { id } = useParams();
@@ -9,6 +14,13 @@ export default function MusicianProfile() {
   const [musician, setMusician] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [reviews, setReviews] = useState([]);
+  const [averageRating, setAverageRating] = useState(0);
+  const [totalReviews, setTotalReviews] = useState(0);
+  const [loadingReviews, setLoadingReviews] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [editingReview, setEditingReview] = useState(null);
 
   useEffect(() => {
     async function fetchMusician() {
@@ -24,6 +36,47 @@ export default function MusicianProfile() {
     }
     fetchMusician();
   }, [id]);
+
+  // טעינת ביקורות ודירוג ממוצע
+  useEffect(() => {
+    async function fetchReviews() {
+      try {
+        setLoadingReviews(true);
+        const reviewsData = await reviewsApi.getReviewsForMusician(id, 10, 1, 'newest');
+
+        setAverageRating(reviewsData.statistics?.averageRating || 0);
+        setTotalReviews(reviewsData.statistics?.totalReviews || 0);
+        setReviews(reviewsData.reviews || []);
+      } catch (err) {
+        console.error('Error fetching reviews:', err);
+      } finally {
+        setLoadingReviews(false);
+      }
+    }
+
+    if (id) {
+      fetchReviews();
+    }
+  }, [id]);
+
+  // טעינת המשתמש הנוכחי
+  useEffect(() => {
+    try {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const decoded = jwtDecode(token);
+        // ודא שיש userId (בתור id או userId)
+        const userWithUserId = {
+          ...decoded,
+          userId: decoded.id || decoded.userId
+        };
+        console.log('Decoded token:', userWithUserId);
+        setCurrentUser(userWithUserId);
+      }
+    } catch (err) {
+      console.error('Error decoding token:', err);
+    }
+  }, []);
 
   if (loading) {
     return (
@@ -86,6 +139,58 @@ export default function MusicianProfile() {
   };
 
   const whatsappLink = profile.whatsappLink || null;
+
+  // טיפול בשליחת ביקורת חדשה
+  const handleSubmitReview = async (reviewData) => {
+    try {
+      if (editingReview) {
+        // עדכון ביקורת קיימת
+        await reviewsApi.updateReview(editingReview._id, reviewData);
+        alert('הביקורת עודכנה בהצלחה!');
+      } else {
+        // יצירת ביקורת חדשה
+        await reviewsApi.createReview(reviewData);
+        alert('ביקורת נשלחה בהצלחה!');
+      }
+      
+      setShowReviewForm(false);
+      setEditingReview(null);
+      
+      // טען את הביקורות שוב
+      const reviewsData = await reviewsApi.getReviewsForMusician(id, 10, 1, 'newest');
+
+      setAverageRating(reviewsData.statistics?.averageRating || 0);
+      setTotalReviews(reviewsData.statistics?.totalReviews || 0);
+      setReviews(reviewsData.reviews || []);
+    } catch (err) {
+      console.error('Error submitting review:', err);
+      alert(err.message || 'שגיאה בשליחת הביקורת');
+    }
+  };
+
+  // טיפול בעריכת ביקורת
+  const handleEditReview = (review) => {
+    setEditingReview(review);
+    setShowReviewForm(true);
+  };
+
+  // טיפול במחיקת ביקורת
+  const handleDeleteReview = async (reviewId) => {
+    if (confirm('האם אתה בטוח שברצונך למחוק את הביקורת?')) {
+      try {
+        await reviewsApi.deleteReview(reviewId);
+        
+        // הסר מהרשימה
+        setReviews(reviews.filter(r => r._id !== reviewId));
+        setTotalReviews(totalReviews - 1);
+        
+        alert('ביקורת הוסרה');
+      } catch (err) {
+        console.error('Error deleting review:', err);
+        alert('שגיאה במחיקת הביקורת');
+      }
+    }
+  };
 
   return (
     <div className="profile-page" dir="rtl">
@@ -227,7 +332,83 @@ export default function MusicianProfile() {
             )}
           </div>
         </section>
+
+        {/* Reviews Section */}
+        <section className="profile-section reviews-section">
+          <div className="reviews-header">
+            <div>
+              <h2 className="section-title">ביקורות וחוות דעת</h2>
+              {totalReviews > 0 && (
+                <div className="reviews-stats">
+                  <div className="rating-display">
+                    <RatingStar 
+                      rating={Math.round(averageRating * 10) / 10}
+                      size="medium"
+                      interactive={false}
+                      showText={true}
+                      count={totalReviews}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+            {currentUser && currentUser.userId !== musician.user._id && (
+              <button 
+                className="btn btn-primary-review"
+                onClick={() => setShowReviewForm(true)}
+              >
+                כתוב ביקורת
+              </button>
+            )}
+          </div>
+
+          {totalReviews === 0 ? (
+            <div className="no-reviews">
+              <p>אין ביקורות עדיין. היה הראשון לכתוב!</p>
+            </div>
+          ) : (
+            <div className="reviews-list">
+              {loadingReviews ? (
+                <div className="loading-reviews">טוען ביקורות...</div>
+              ) : (
+                reviews.map(review => {
+                  const isOwner = currentUser && currentUser.userId === (review.reviewerId?._id || review.reviewerId);
+                  console.log('Review comparison:', {
+                    currentUserId: currentUser?.userId,
+                    reviewerId: review.reviewerId?._id || review.reviewerId,
+                    isOwner,
+                    currentUser
+                  });
+                  return (
+                    <ReviewCard
+                      key={review._id}
+                      review={review}
+                      onDelete={handleDeleteReview}
+                      onEdit={handleEditReview}
+                      isOwner={isOwner}
+                      isMusician={currentUser && currentUser.userId === musician.user._id}
+                      isAdmin={currentUser && currentUser.role === 'admin'}
+                    />
+                  );
+                })
+              )}
+            </div>
+          )}
+        </section>
       </div>
+
+      {/* Review Form Modal */}
+      {showReviewForm && (
+        <ReviewForm
+          musicianId={id}
+          editingReview={editingReview}
+          onSubmit={handleSubmitReview}
+          onClose={() => {
+            setShowReviewForm(false);
+            setEditingReview(null);
+          }}
+        />
+      )}
     </div>
   );
 }

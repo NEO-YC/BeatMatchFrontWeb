@@ -49,7 +49,26 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
     setCurrentIndex(prev => Math.min(prev, Math.max(randomMusicians.length - cardsToShow, 0)));
   }, [cardsToShow, randomMusicians.length]);
 
+  // עדכון מיידי של סטטוס PRO מהשרת כשנכנסים לדף
+  useEffect(() => {
+    const checkProfileStatus = async () => {
+      if (isLoggedIn && user?.userId) {
+        try {
+          const response = await api.getMyMusicianProfile();
+          if (response && response.musicianProfile) {
+            setProfileActive(response.musicianProfile.isActive === true);
+          } else {
+            setProfileActive(false);
+          }
+        } catch (error) {
+          console.error('Error checking profile status:', error);
+          setProfileActive(profileActiveProp === true);
+        }
+      }
+    };
 
+    checkProfileStatus();
+  }, [isLoggedIn, user?.userId]);
 
   const goToSearch = () => navigate("/search");
   const goToLogin = () => navigate("/login");

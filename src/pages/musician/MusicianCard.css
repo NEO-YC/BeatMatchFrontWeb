@@ -66,6 +66,19 @@
   margin: 0;
 }
 
+.musician-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.rating-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+}
+
 .musician-card-body {
   padding: 20px;
   display: flex;

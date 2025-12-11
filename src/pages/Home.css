@@ -1934,11 +1934,22 @@
   }
 
   .carousel-container {
-    padding: 0 16px;
+    padding: 0 50px;
   }
 
   .carousel-arrow {
-    display: none !important;
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 16px !important;
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+  }
+
+  .carousel-arrow-left {
+    left: 8px !important;
+  }
+
+  .carousel-arrow-right {
+    right: 8px !important;
   }
   
   .musician-card-image {
@@ -2129,13 +2140,21 @@
   }
 
   .carousel-container {
-    padding: 0 34px;
+    padding: 0 44px;
   }
 
   .carousel-arrow {
-    width: 34px;
-    height: 34px;
-    font-size: 16px;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .carousel-arrow-left {
+    left: 6px;
+  }
+
+  .carousel-arrow-right {
+    right: 6px;
   }
   
   .musician-card-image {

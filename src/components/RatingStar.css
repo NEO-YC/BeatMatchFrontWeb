@@ -1,0 +1,158 @@
+/* ================================
+   RATING STAR COMPONENT STYLES
+   ================================ */
+
+.rating-star-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: "Assistant", -apple-system, sans-serif;
+}
+
+.rating-star-container.interactive {
+  cursor: pointer;
+}
+
+.stars-wrapper {
+  display: flex;
+  gap: 8px;
+  direction: ltr;
+}
+
+.star {
+  display: inline-block;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* כוכב ריק */
+.star.empty {
+  color: #cbd5e1;
+  transform: scale(1);
+}
+
+/* כוכב מלא */
+.star.filled {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #f59e0b;
+  transform: scale(1.1);
+}
+
+/* Hover effect */
+.rating-star-container.interactive .star:hover,
+.rating-star-container.interactive .star:focus {
+  transform: scale(1.2) rotate(15deg);
+  filter: drop-shadow(0 4px 12px rgba(245, 158, 11, 0.4));
+}
+
+.rating-star-container.interactive .star.filled:hover,
+.rating-star-container.interactive .star.filled:focus {
+  color: #ea580c;
+}
+
+/* טקסט דירוג */
+.rating-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  min-height: 24px;
+}
+
+.rating-number {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ec4899 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.rating-label {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.rating-count {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-right: 4px;
+}
+
+.rating-placeholder {
+  font-size: 14px;
+  color: #cbd5e1;
+  font-style: italic;
+}
+
+/* גדלים שונים */
+.rating-star-container.small {
+  gap: 8px;
+}
+
+.rating-star-container.small .stars-wrapper {
+  gap: 4px;
+}
+
+.rating-star-container.small .rating-text {
+  font-size: 12px;
+}
+
+.rating-star-container.large {
+  gap: 16px;
+}
+
+.rating-star-container.large .stars-wrapper {
+  gap: 12px;
+}
+
+.rating-star-container.large .rating-number {
+  font-size: 28px;
+}
+
+.rating-star-container.xl {
+  gap: 20px;
+}
+
+.rating-star-container.xl .stars-wrapper {
+  gap: 16px;
+}
+
+.rating-star-container.xl .rating-number {
+  font-size: 32px;
+}
+
+/* Static mode (ללא hover effects) */
+.rating-star-container.static .star {
+  cursor: default;
+}
+
+.rating-star-container.static .star:hover {
+  transform: scale(1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .rating-star-container {
+    gap: 10px;
+  }
+
+  .stars-wrapper {
+    gap: 6px;
+  }
+
+  .star {
+    font-size: 20px;
+  }
+
+  .rating-star-container.interactive .star:hover {
+    transform: scale(1.15) rotate(15deg);
+  }
+}

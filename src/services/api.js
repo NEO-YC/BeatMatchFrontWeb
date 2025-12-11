@@ -2,6 +2,7 @@
 export const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://beatmatchbackweb.onrender.com';
 const USER_BASE_URL = `${API_BASE_URL}/user`;
 const EVENT_BASE_URL = `${API_BASE_URL}/event`;
+const REVIEW_BASE_URL = `${API_BASE_URL}/review`;
 
 async function request(path, options = {}) {
   const headers = options.headers ? { ...options.headers } : {};
@@ -199,4 +200,43 @@ export const eventsApi = {
   updateEvent,
   deleteEvent,
   closeEvent
+};
+
+// =====================
+// Review API Functions
+// =====================
+
+export function createReview(payload) {
+  return requestAbsolute(`${REVIEW_BASE_URL}/create`, {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  });
+}
+
+export function getReviewsForMusician(musicianId, limit = 10, page = 1, sortBy = 'newest') {
+  const params = new URLSearchParams({ limit, page, sortBy });
+  return fetch(`${REVIEW_BASE_URL}/musician/${musicianId}?${params}`).then(res => res.json());
+}
+
+export function getAverageRating(musicianId) {
+  return fetch(`${REVIEW_BASE_URL}/average/${musicianId}`).then(res => res.json());
+}
+
+export function updateReview(reviewId, payload) {
+  return requestAbsolute(`${REVIEW_BASE_URL}/update/${reviewId}`, {
+    method: 'PUT',
+    body: JSON.stringify(payload)
+  });
+}
+
+export function deleteReview(reviewId) {
+  return requestAbsolute(`${REVIEW_BASE_URL}/delete/${reviewId}`, { method: 'DELETE' });
+}
+
+export const reviewsApi = {
+  createReview,
+  getReviewsForMusician,
+  getAverageRating,
+  updateReview,
+  deleteReview
 };

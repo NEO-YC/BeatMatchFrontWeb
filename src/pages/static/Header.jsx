@@ -467,7 +467,7 @@ function Header() {
 
             <div className="drawer-footer">
               <p className="drawer-footer-text">BeatMatch © 2025</p>
-              <p className="drawer-footer-text">הפלטפורמה המובילה למוזיקאים בישראל 🎵</p>
+              <p className="drawer-footer-text">הפלטפורמה המובילה למוזיקאים ומארגני אירועים </p>
             </div>
           </div>
         </div>

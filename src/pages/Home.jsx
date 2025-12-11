@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { searchMusicians } from "../services/api";
+import { searchMusicians, reviewsApi } from "../services/api";
 import api from "../services/api";
+import RatingStar from "../components/RatingStar";
 import "./Home.css";
 
 const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }) => {
   const navigate = useNavigate();
   const [randomMusicians, setRandomMusicians] = useState([]);
   const [allMusicians, setAllMusicians] = useState([]);
+  const [musicianRatings, setMusicianRatings] = useState({});
   const [showAll, setShowAll] = useState(false);
   const [loadingMusicians, setLoadingMusicians] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,8 +23,27 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
         const result = await searchMusicians({});
         const musiciansData = result.musicians || result.data || [];
         setAllMusicians(musiciansData);
-        const shuffled = [...musiciansData].sort(() => 0.5 - Math.random());
-        setRandomMusicians(shuffled.slice(0, 9));
+        
+        // טען ratings לכל נגן
+        const ratings = {};
+        for (const musician of musiciansData) {
+          try {
+            const ratingData = await reviewsApi.getAverageRating(musician._id);
+            ratings[musician._id] = ratingData.averageRating || 0;
+          } catch (err) {
+            ratings[musician._id] = 0;
+          }
+        }
+        setMusicianRatings(ratings);
+        
+        // סדר לפי ביקורות גבוהות
+        const sortedByRating = [...musiciansData].sort((a, b) => {
+          const ratingA = ratings[a._id] || 0;
+          const ratingB = ratings[b._id] || 0;
+          return ratingB - ratingA;
+        });
+        
+        setRandomMusicians(sortedByRating.slice(0, 9));
       } catch (error) {
         console.error('Error loading musicians:', error);
       } finally {
@@ -140,6 +161,15 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
                       {fullName}
                       {profile.isActive && <span className="pro-badge-small">PRO</span>}
                     </h3>
+                    {musicianRatings[musician._id] > 0 && (
+                      <div className="musician-rating-small">
+                        <RatingStar 
+                          rating={musicianRatings[musician._id]} 
+                          size="small"
+                          interactive={false}
+                        />
+                      </div>
+                    )}
                     <p className="musician-instruments">{instruments.length > 0 ? instruments.join(', ') : 'מוזיקאי'}</p>
                     <p className="musician-location">📍 {locationText}</p>
                     {genres.length > 0 && (
@@ -207,6 +237,15 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
                         {fullName}
                         {profile.isActive && <span className="pro-badge-small">PRO</span>}
                       </h3>
+                      {musicianRatings[musician._id] > 0 && (
+                        <div className="musician-rating-small">
+                          <RatingStar 
+                            rating={musicianRatings[musician._id]} 
+                            size="small"
+                            interactive={false}
+                          />
+                        </div>
+                      )}
                       <p className="musician-instruments">{instruments.length > 0 ? instruments.join(', ') : 'מוזיקאי'}</p>
                       <p className="musician-location">📍 {locationText}</p>
                       {genres.length > 0 && (
@@ -413,7 +452,7 @@ const Home = ({ isLoggedIn, isMusician, user, profileActive: profileActiveProp }
 
       {/* גלריית נגנים */}
       <section className="home-musicians-gallery">
-        <h2>נגנים מומלצים</h2>
+        <h2>נגנים שמדורגים גבוה ⭐</h2>
         <p className="gallery-subtitle">הכירו חלק מהמוזיקאים שמחכים לכם</p>
         
         {renderGallery()}

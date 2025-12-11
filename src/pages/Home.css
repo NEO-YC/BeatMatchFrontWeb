@@ -1069,6 +1069,14 @@
   box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
 }
 
+.musician-rating-small {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+
 .gallery-loading {
   text-align: center;
   padding: 60px 20px;

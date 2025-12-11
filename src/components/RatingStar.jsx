@@ -64,8 +64,8 @@ const RatingStar = ({
         <div className="rating-text">
           {displayRating > 0 ? (
             <>
+            <span className="rating-label">5 / </span>
               <span className="rating-number">{displayRating}</span>
-              <span className="rating-label">מתוך 5</span>
               {count > 0 && <span className="rating-count">({count} ביקורות)</span>}
             </>
           ) : (

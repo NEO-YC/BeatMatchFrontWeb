@@ -93,6 +93,7 @@ header.mobile-menu-open .burger-menu span:nth-child(3) {
 }
 
 @media (max-width: 640px) {
+
   .mobile-backdrop {
     display: none;
     position: fixed;
@@ -102,11 +103,12 @@ header.mobile-menu-open .burger-menu span:nth-child(3) {
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(3px);
-    z-index: 1001;
+    z-index: 2000;
     animation: fadeIn 0.3s ease;
+    pointer-events: none;
   }
 
-  header.mobile-menu-open .mobile-backdrop {
+  body.mobile-menu-open .mobile-backdrop {
     display: block !important;
     pointer-events: auto;
   }
@@ -169,6 +171,8 @@ header.mobile-menu-open .burger-menu span:nth-child(3) {
   header.mobile-menu-open .right-actions {
     right: 0;
   }
+
+  /* When menu open, add class to body for backdrop */
 
   /* Show drawer elements in mobile */
   .drawer-user-profile,

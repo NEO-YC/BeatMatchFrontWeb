@@ -104,14 +104,14 @@ export default function Events({ isAdmin, user }) {
     <div className="events-container">
       <div className="events-header">
         <h1 className="events-title"> לוח אירועים פתוחים🎉</h1>
-        <a href="/create-event" className="btn-create-event">+ פרסם אירוע חדש</a>
+        <button onClick={() => navigate('/create-event')} className="btn-create-event">+ פרסם אירוע חדש</button>
       </div>
       
       {events.length === 0 ? (
         <div className="empty-state">
           <div className="empty-icon">📭</div>
           <p>אין כרגע אירועים פתוחים</p>
-          <a href="/create-event" className="btn-secondary">היה הראשון לפרסם</a>
+          <button onClick={() => navigate('/create-event')} className="btn-secondary">היה הראשון לפרסם</button>
         </div>
       ) : (
         <div className="events-grid">

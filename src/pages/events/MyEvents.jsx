@@ -82,10 +82,10 @@ export default function MyEvents() {
   return (
     <div className="my-events-container">
       <div className="my-events-header">
-        <h1 className="my-events-title">האירועים שלי</h1>
         <button className="btn primary-btn" onClick={() => navigate('/create-event')}>
           + פרסם אירוע חדש
         </button>
+        <h1 className="my-events-title">: האירועים שלי</h1>
       </div>
 
       {message && (
@@ -253,11 +253,12 @@ export default function MyEvents() {
                   </div>
 
                   <div className="event-actions">
-                    <button className="btn edit-btn" onClick={() => handleEdit(event)}>
-                      ✏️ ערוך
-                    </button>
+
                     <button className="btn delete-btn" onClick={() => handleDelete(event._id)}>
-                      🗑️ מחק
+                      🗑️
+                    </button>
+                    <button className="btn edit-btn" onClick={() => handleEdit(event)}>
+                       ערוך
                     </button>
                   </div>
 

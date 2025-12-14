@@ -98,10 +98,11 @@ export default function CreateEvent() {
     <div className="create-event-container">
       <div className="create-event-card">
         <div className="form-header">
-          <div className="form-icon">🎵</div>
+          <div className="form-icon">🎵 </div>
           <h1 className="form-title">פרסום אירוע חדש</h1>
-          <p className="form-subtitle">מלא את הפרטים למטה ומוזיקאים יוכלו ליצור איתך קשר</p>
         </div>
+          <p className="form-subtitle">:מלא את הפרטים למטה ומוזיקאים יוכלו ליצור איתך קשר</p>
+          <br />
 
         <form onSubmit={onSubmit} className="event-form">
           <div className="form-section">

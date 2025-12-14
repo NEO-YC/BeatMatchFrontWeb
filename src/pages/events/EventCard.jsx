@@ -175,10 +175,10 @@ export default function EventCard({ event, currentUserId, isAdmin, onUpdate, onD
         {canEdit && (
           <>
             <button className="event-btn warning" onClick={() => setIsEditing(true)}>
-              עריכה ✏️  
+              ערוך 
             </button>
             <button className="event-btn danger" onClick={() => onDelete(event._id)}>
-              מחיקה 🗑️ 
+              מחיקה 
             </button>
           </>
         )}

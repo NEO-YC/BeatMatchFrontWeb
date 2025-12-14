@@ -156,20 +156,19 @@ function Header() {
 
   return (
     <div>
-      {/* Mobile Menu Backdrop - Closes drawer when clicked */}
-      {mobileMenuOpen && (
-        <div 
-          className="mobile-backdrop" 
-          onClick={(e) => {
-            e.stopPropagation();
-            setMobileMenuOpen(false);
-          }}
-          role="presentation"
-          aria-hidden="true"
-        />
-      )}
-
       <header className={mobileMenuOpen ? 'mobile-menu-open' : ''}>
+        {/* Mobile Menu Backdrop - Closes drawer when clicked */}
+        {mobileMenuOpen && (
+          <div 
+            className="mobile-backdrop" 
+            onClick={(e) => {
+              e.stopPropagation();
+              setMobileMenuOpen(false);
+            }}
+            role="presentation"
+            aria-hidden="true"
+          />
+        )}
         <div className="header-content">
           <NavLink to="/" className="logo-section" onClick={() => setMobileMenuOpen(false)}>
             <img src="/BMproject.png" alt="BeatMatch" className="site-logo" />

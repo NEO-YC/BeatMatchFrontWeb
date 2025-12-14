@@ -158,10 +158,8 @@ function Header() {
         <div 
           className="mobile-backdrop" 
           onClick={(e) => {
-            if (e.target.classList.contains('mobile-backdrop')) {
-              setMobileMenuOpen(false);
-              setIsMenuOpen(false);
-            }
+            e.stopPropagation();
+            setMobileMenuOpen(false);
           }}
           role="presentation"
           aria-hidden="true"
@@ -178,7 +176,7 @@ function Header() {
           <button 
             className="burger-menu"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="פתח תפריט"
+            aria-label={mobileMenuOpen ? "סגור תפריט" : "פתח תפריט"}
           >
             <span />
             <span />
@@ -303,7 +301,33 @@ function Header() {
           )}
 
           {/* Mobile Drawer */}
-          <div className="right-actions">
+          <div 
+            className="right-actions"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close (X) button for mobile drawer */}
+            {mobileMenuOpen && (
+              <button
+                className="drawer-close-x"
+                aria-label="סגור תפריט"
+                onClick={() => setMobileMenuOpen(false)}
+                style={{
+                  position: 'absolute',
+                  top: 12,
+                  right: 12,
+                  background: 'none',
+                  border: 'none',
+                  fontSize: 32,
+                  color: '#ec4899',
+                  zIndex: 1100,
+                  cursor: 'pointer',
+                  padding: 0,
+                  lineHeight: 1
+                }}
+              >
+                ×
+              </button>
+            )}
             {user ? (
               <>
                 {/* User Profile Section - Top of Drawer */}

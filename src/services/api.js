@@ -1,5 +1,6 @@
 // Minimal API helper for auth (register / login)
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://beatmatchbackweb.onrender.com';
+
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 const USER_BASE_URL = `${API_BASE_URL}/user`;
 const EVENT_BASE_URL = `${API_BASE_URL}/event`;
 const REVIEW_BASE_URL = `${API_BASE_URL}/review`;

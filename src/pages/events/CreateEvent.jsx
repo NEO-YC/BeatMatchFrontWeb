@@ -11,6 +11,7 @@ export default function CreateEvent() {
     eventType: 'חתונה',
     eventDate: '',
     location: '',
+    instruments: '',
     budgetMin: '',
     budgetMax: '',
     description: ''
@@ -52,7 +53,7 @@ export default function CreateEvent() {
       setMessage({ type: 'success', text: 'האירוע פורסם בהצלחה! 🎉 מעבר לדף האירועים שלי...' });
       setForm({
         eventType: 'חתונה',
-        eventDate: '', location: '', budgetMin: '', budgetMax: '', description: ''
+        eventDate: '', location: '', instruments: '', budgetMin: '', budgetMax: '', description: ''
       });
       // מעבר לדף האירועים שלי אחרי 2 שניות
       setTimeout(() => navigate('/my-events'), 2000);
@@ -141,6 +142,18 @@ export default function CreateEvent() {
                 value={form.location} 
                 onChange={onChange} 
                 placeholder="לדוגמה: תל אביב, אולם אירועים XYZ"
+                required 
+              />
+            </label>
+
+            <label className="form-label">
+              <span className="label-text">כלי נגינה *</span>
+              <input 
+                className="form-input"
+                name="instruments" 
+                value={form.instruments} 
+                onChange={onChange} 
+                placeholder="לדוגמה: גיטרה, תופים, זמר"
                 required 
               />
             </label>

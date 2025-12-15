@@ -10,6 +10,7 @@ export default function EventCard({ event, currentUserId, isAdmin, onUpdate, onD
     eventType: event.eventType,
     eventDate: event.eventDate.split('T')[0],
     location: event.location,
+    instruments: event.instruments || '',
     budgetMin: event.budgetMin || '',
     budgetMax: event.budgetMax || '',
     description: event.description
@@ -34,6 +35,7 @@ export default function EventCard({ event, currentUserId, isAdmin, onUpdate, onD
       eventType: event.eventType,
       eventDate: event.eventDate.split('T')[0],
       location: event.location,
+      instruments: event.instruments || '',
       budgetMin: event.budgetMin || '',
       budgetMax: event.budgetMax || '',
       description: event.description
@@ -70,6 +72,16 @@ export default function EventCard({ event, currentUserId, isAdmin, onUpdate, onD
               type="text" 
               value={editData.location}
               onChange={e => setEditData({...editData, location: e.target.value})}
+            />
+          </label>
+
+          <label>
+            כלי נגינה
+            <input 
+              type="text" 
+              value={editData.instruments}
+              onChange={e => setEditData({...editData, instruments: e.target.value})}
+              required
             />
           </label>
 
@@ -157,6 +169,11 @@ export default function EventCard({ event, currentUserId, isAdmin, onUpdate, onD
         <div className="event-section">
           <div className="section-label">מיקום</div>
           <div className="event-value">📍 {event.location}</div>
+        </div>
+
+        <div className="event-section">
+          <div className="section-label">כלי נגינה</div>
+          <div className="event-value">🎸 {event.instruments || 'לא צוין'}</div>
         </div>
         
         <div className="event-section">

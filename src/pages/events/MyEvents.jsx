@@ -112,39 +112,6 @@ export default function MyEvents() {
                   <h3 className="edit-title">עריכת אירוע</h3>
                   
                   <label className="form-label">
-                    <span className="label-text">שם איש קשר</span>
-                    <input
-                      className="form-input"
-                      name="contactName"
-                      value={editingEvent.contactName}
-                      onChange={handleEditChange}
-                      required
-                    />
-                  </label>
-
-                  <label className="form-label">
-                    <span className="label-text">טלפון</span>
-                    <input
-                      className="form-input"
-                      name="contactPhone"
-                      value={editingEvent.contactPhone}
-                      onChange={handleEditChange}
-                      required
-                    />
-                  </label>
-
-                  <label className="form-label">
-                    <span className="label-text">אימייל</span>
-                    <input
-                      className="form-input"
-                      type="email"
-                      name="contactEmail"
-                      value={editingEvent.contactEmail || ''}
-                      onChange={handleEditChange}
-                    />
-                  </label>
-
-                  <label className="form-label">
                     <span className="label-text">סוג אירוע</span>
                     <select
                       className="form-select"
@@ -181,6 +148,17 @@ export default function MyEvents() {
                       className="form-input"
                       name="location"
                       value={editingEvent.location}
+                      onChange={handleEditChange}
+                      required
+                    />
+                  </label>
+
+                  <label className="form-label">
+                    <span className="label-text">כלי נגינה</span>
+                    <input
+                      className="form-input"
+                      name="instruments"
+                      value={editingEvent.instruments || ''}
                       onChange={handleEditChange}
                       required
                     />
@@ -230,21 +208,9 @@ export default function MyEvents() {
                     </div>
 
                     <div className="event-detail">
-                      <span className="detail-label">👤 איש קשר:</span>
-                      <span className="detail-value">{event.contactName}</span>
+                      <span className="detail-label">🎸 כלי נגינה:</span>
+                      <span className="detail-value">{event.instruments || 'לא צוין'}</span>
                     </div>
-
-                    <div className="event-detail">
-                      <span className="detail-label">📞 טלפון:</span>
-                      <span className="detail-value">{event.contactPhone}</span>
-                    </div>
-
-                    {event.contactEmail && (
-                      <div className="event-detail">
-                        <span className="detail-label">📧 אימייל:</span>
-                        <span className="detail-value">{event.contactEmail}</span>
-                      </div>
-                    )}
 
                     <div className="event-description">
                       <span className="detail-label">📝 תיאור:</span>

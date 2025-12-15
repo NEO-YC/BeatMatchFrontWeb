@@ -173,7 +173,7 @@ export default function Search() {
               <span className="search-icon">🔍</span>
               <input
                 className="input-large"
-                placeholder="חפש לפי שם, כלי נגינה או סגנון מוזיקלי..."
+                placeholder="חפש לפי שם..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
